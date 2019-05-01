@@ -1,2 +1,4 @@
-1. Execute FFNN_Train.m to train the neural net
-2. Execute FFNN_Error_Plot.m to plot error of the trained FFNN
+1. Download all files to the same directory, or a directory on the MATLAB search path
+2. Execute FFNN_Train.m to train the neural net using the data provided. The .mat
+      data files contain results data from SCA with which the FFNN is trained.
+3. Execute FFNN_Error_Plot.m to plot error of the trained FFNN

@@ -1,0 +1,2 @@
+1. Execute FFNN_Train.m to train the neural net
+2. Execute FFNN_Error_Plot.m to plot error of the trained FFNN

@@ -20,10 +20,10 @@
 load('SCA_NN_validation.mat')
 load('loading_samples_150_test.mat')
 load('SCA_NN_net.mat');
-nn_test=net(a')';
+sigma_sup_FFNN_M=net(epsilon_sup_M')';
 
-l1=sum(abs(nn_test-b_test),2);
-l2=sum((nn_test-b_test).^2,2);
+l1=sum(abs(sigma_sup_FFNN_M-sigma_sup_SCA_M),2);
+l2=sum((sigma_sup_FFNN_M-sigma_sup_SCA_M).^2,2);
 hist(l2,60);
 set(gca,'FontSize',16);
 xlabel(['Difference in',char(8467),'^{2} norm'],'fontsize',16); ylabel('Number of Samples','fontsize',16);
@@ -34,9 +34,9 @@ ax.FontSize = 16;
 fs=16;
 figure; 
 subplot(1,3,1);
-plot(b_test(:,1),nn_test(:,1),'r*');hold on
-plot(b_test(:,1),b_test(:,1),'k')
-cor=corrcoef(b_test(:,3),nn_test(:,3));
+plot(sigma_sup_SCA_M(:,1),sigma_sup_FFNN_M(:,1),'r*');hold on
+plot(sigma_sup_SCA_M(:,1),sigma_sup_SCA_M(:,1),'k')
+cor=corrcoef(sigma_sup_SCA_M(:,3),sigma_sup_FFNN_M(:,3));
 str=sprintf('r= %1.4f',cor(1,2));
 T = text(max(get(gca, 'xlim'))*0.2, max(get(gca, 'ylim'))*0.8, str); 
 set(T, 'fontsize', 16, 'verticalalignment', 'top', 'horizontalalignment', 'left');
@@ -46,10 +46,10 @@ xlim([0 12]);ylim([0 12])
 set(gca,'FontSize',14);
 xlabel([char(963),'_{xx}^{M}, MPa'],'fontsize',fs); ylabel([char(963),'_{xx}^{M}, MPa'],'fontsize',fs);ax = gca;ax.FontSize = 16;
 subplot(1,3,2);
-plot(b_test(:,2),nn_test(:,2),'blue*');hold on
-plot(b_test(:,2),b_test(:,2),'k')
+plot(sigma_sup_SCA_M(:,2),sigma_sup_FFNN_M(:,2),'blue*');hold on
+plot(sigma_sup_SCA_M(:,2),sigma_sup_SCA_M(:,2),'k')
 xlim([0 12]);ylim([0 12])
-cor=corrcoef(b_test(:,3),nn_test(:,3));
+cor=corrcoef(sigma_sup_SCA_M(:,3),sigma_sup_FFNN_M(:,3));
 str=sprintf('r= %1.4f',cor(1,2));
 T = text(max(get(gca, 'xlim'))*0.2, max(get(gca, 'ylim'))*0.8, str); 
 set(T, 'fontsize', 16, 'verticalalignment', 'top', 'horizontalalignment', 'left');
@@ -59,10 +59,10 @@ set(gca,'FontSize',14);
 xlabel([char(963),'_{yy}^{M}, MPa'],'fontsize',fs); ylabel([char(963),'_{yy}^{M}, MPa'],'fontsize',fs);ax = gca;ax.FontSize = 16;
 
 subplot(1,3,3);
-plot(b_test(:,3),nn_test(:,3),'g*');hold on
-plot(nn_test(:,3),nn_test(:,3),'k')
+plot(sigma_sup_SCA_M(:,3),sigma_sup_FFNN_M(:,3),'g*');hold on
+plot(sigma_sup_FFNN_M(:,3),sigma_sup_FFNN_M(:,3),'k')
 xlim([0 2.5]);ylim([0 2.5])
-cor=corrcoef(b_test(:,3),nn_test(:,3));
+cor=corrcoef(sigma_sup_SCA_M(:,3),sigma_sup_FFNN_M(:,3));
 str=sprintf('r= %1.4f',cor(1,2));
 T = text(max(get(gca, 'xlim'))*0.2, max(get(gca, 'ylim'))*0.8, str); 
 set(T, 'fontsize', 16, 'verticalalignment', 'top', 'horizontalalignment', 'left');
@@ -75,10 +75,11 @@ figure;
 subplot(1,3,1);
 set(gca,'FontSize',fs);
 
-j=ceil(rand*30)-1;
+%j=ceil(rand*30)-1;
+j=16;
 strain=zeros(1,6);stress_sca=strain;stress_nn=strain;
 for i =1:5
-    strain(i+1)=a((i-1)*30+j,1); stress_sca(i+1)=b_test((i-1)*30+j,1);stress_nn(i+1)=nn_test((i-1)*30+j,1);
+    strain(i+1)=epsilon_sup_M((i-1)*30+j,1); stress_sca(i+1)=sigma_sup_SCA_M((i-1)*30+j,1);stress_nn(i+1)=sigma_sup_FFNN_M((i-1)*30+j,1);
 end
 
 plot(strain,stress_sca,'r','linewidth',2);hold on
@@ -95,7 +96,7 @@ ax = gca;ax.FontSize = 16;
 subplot(1,3,2);
 set(gca,'FontSize',fs);
 for i =1:5
-    strain(i+1)=a((i-1)*30+j,2); stress_sca(i+1)=b_test((i-1)*30+j,2);stress_nn(i+1)=nn_test((i-1)*30+j,2);
+    strain(i+1)=epsilon_sup_M((i-1)*30+j,2); stress_sca(i+1)=sigma_sup_SCA_M((i-1)*30+j,2);stress_nn(i+1)=sigma_sup_FFNN_M((i-1)*30+j,2);
 end
 plot(strain,stress_sca,'r','linewidth',2);hold on
 plot(strain,stress_nn,'x','linewidth',2,'markersize',10)
@@ -111,7 +112,7 @@ ax = gca;ax.FontSize = 16;
 subplot(1,3,3);
 set(gca,'FontSize',fs);
 for i =1:5
-    strain(i+1)=a((i-1)*30+j,3); stress_sca(i+1)=b_test((i-1)*30+j,3);stress_nn(i+1)=nn_test((i-1)*30+j,3);
+    strain(i+1)=epsilon_sup_M((i-1)*30+j,3); stress_sca(i+1)=sigma_sup_SCA_M((i-1)*30+j,3);stress_nn(i+1)=sigma_sup_FFNN_M((i-1)*30+j,3);
 end
 plot(strain,stress_sca,'r','linewidth',2);hold on
 plot(strain,stress_nn,'x','linewidth',2,'markersize',10)

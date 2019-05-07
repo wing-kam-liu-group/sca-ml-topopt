@@ -19,7 +19,7 @@
 %% Load training data
 input=load('SCA_NN_database.mat');
 net = fitnet(25);
-net = train(net,input.a',input.b');
+net = train(net,input.epsilon_sup_M',input.sigma_sup_M');
 
 %% save trained network 
 save SCA_NN_net net

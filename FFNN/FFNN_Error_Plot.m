@@ -75,6 +75,7 @@ figure;
 subplot(1,3,1);
 set(gca,'FontSize',fs);
 
+%% random seed j contorls which loading history to plot. In the paper, 16 is used. Users can also uncomment line 79 and comment line 80 to examine if the NN capable of capturing all loading cases
 %j=ceil(rand*30)-1;
 j=16;
 strain=zeros(1,6);stress_sca=strain;stress_nn=strain;

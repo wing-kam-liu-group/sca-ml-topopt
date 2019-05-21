@@ -1,22 +1,7 @@
 %     This program is for training the CNN network for predicting macroscopic stress state 
-%     given a mesh and macroscopic strain state
-%     Copyright (C) May 1 2019,  Hengyang Li, Northwestern University
-%     Part of the code is learned from Ole Sigmund et.al: 
+%     Part of the code was adapted from Ole Sigmund et.al: 
 %     http://www.topopt.mek.dtu.dk/Apps-and-software/A-99-line-topology-optimization-code-written-in-MATLAB
 %     Sigmund, O. Struct Multidisc Optim (2001) 21: 120. https://doi.org/10.1007/s001580050176
-%     This program is free software: you can redistribute it and/or modify
-%     it under the terms of the GNU General Public License as published by
-%     the Free Software Foundation, either version 3 of the License, or
-%     (at your option) any later version.
-% 
-%     This program is distributed in the hope that it will be useful,
-%     but WITHOUT ANY WARRANTY; without even the implied warranty of
-%     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%     GNU General Public License for more details.
-% 
-%     You should have received a copy of the GNU General Public License
-%     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-%%%------------------------------------------------------------------------------------------------------------%%%
 
 
 % DEFINE PART SIZE: nelx,nely. VOLUME FRACTION: Volfrac. PENALTY:penal. MINIMAL

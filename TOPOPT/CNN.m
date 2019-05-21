@@ -1,5 +1,4 @@
 %%%%%%%%%% CNN+FFNN constraint %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     This program is for Training the FFNN 
 %     Copyright (C) May 20 2019,  Hengyang Li, Northwestern University
 % 
 %     This program is free software: you can redistribute it and/or modify

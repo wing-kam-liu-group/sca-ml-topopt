@@ -65,8 +65,8 @@ set(T, 'fontsize', 16, 'verticalalignment', 'top', 'horizontalalignment', 'left'
 legend([char(963),'_{yy,SCA}^{M} vs. ',char(963),'_{yy, FFNN}^{M}'],...
     [char(963),'_{yy,SCA}^{M} vs. ',char(963),'_{yy, SCA}^{M}'],'Location','southeast')
 set(gca,'FontSize',14);
-xlabel([char(963),'_{yy}^{M}, MPa'],'fontsize',fs);
-ylabel([char(963),'_{yy}^{M}, MPa'],'fontsize',fs);
+xlabel([char(963),'_{yy}^{M}, MPa'], 'fontsize', fs);
+ylabel([char(963),'_{yy}^{M}, MPa'], 'fontsize', fs);
 ax = gca;
 ax.FontSize = 16;
 
@@ -131,7 +131,8 @@ plot(strain, stress_sca, 'r', 'linewidth', 2)
 hold on
 plot(strain, stress_nn, 'x', 'linewidth', 2, 'markersize', 10)
 legend([char(963),'_{yy,SCA}^{M}'],[char(963),'_{yy,FFNN}^{M}'], 'Location', 'Best')
-xlabel([char(949),'_{yy}^{M}'],'fontsize',fs); ylabel([char(963),'_{yy}^{M}, MPa'],'fontsize',fs);
+xlabel([char(949),'_{yy}^{M}'],'fontsize', fs);
+ylabel([char(963),'_{yy}^{M}, MPa'],'fontsize', fs);
 xlim([0 max(strain)*1.05])
 ylim([0 max(stress_sca)*1.05])
 set(gca, 'XTick', strain)

@@ -1,8 +1,5 @@
 %%%%%%%%%% FE-ANALYSIS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%     Part of the code was adapted from Ole Sigmund et.al: 
-%     http://www.topopt.mek.dtu.dk/Apps-and-software/A-99-line-topology-optimization-code-written-in-MATLAB
-%     Sigmund, O. Struct Multidisc Optim (2001) 21: 120. https://doi.org/10.1007/s001580050176
-
+%%% This part is from Sigmund's 99 code.%%%
 function [U]=FE(nelx,nely,x,penal)
 [KE] = lk; 
 K = sparse(2*(nelx+1)*(nely+1), 2*(nelx+1)*(nely+1));

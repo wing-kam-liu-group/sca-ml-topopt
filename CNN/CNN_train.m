@@ -18,8 +18,8 @@
 function main
 global CNN_hist
 %%load inputs
-load('..\Database\CNN_train_in_git.mat');
-load('..\Database\CNN_validation_in_git.mat');
+load(fullfile('..','Database','CNN_train_in_git.mat'));
+load(fullfile('..','Database','CNN_validation_in_git.mat'));
 sample_size=size(sig_local_train,4);
 rand_seq=randperm(sample_size);
 XTrain=sig_local_train(:,:,:,rand_seq);

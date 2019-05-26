@@ -5,4 +5,4 @@
    
 3. Run CNN_Error_Plots.m to plot the results.
 
-Note: Since the input files are very large, the complete CNN code is uploaded as a .zip file in the latest release.
+Note: Since the input files are very large, the complete CNN code (with database) is uploaded as a .zip file in the latest release.

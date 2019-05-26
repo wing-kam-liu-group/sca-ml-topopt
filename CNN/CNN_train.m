@@ -1,5 +1,5 @@
-%     This program is for training the CNN network for predicting macroscopic stress state 
-%     given a mesh and macroscopic strain state
+%     This program is for training the CNN network for predicting macroscopic strain state 
+%     given a mesh and microscopic stress contour
 %     Copyright (C) May 1 2019,  Jiaying Gao, Northwestern University
 % 
 %     This program is free software: you can redistribute it and/or modify
@@ -17,17 +17,19 @@
 
 function main
 global CNN_hist
-load('CNN_inputs.mat');
-sigma_sup_SCA_M=XTrain;
-eps_sup_SCA_M=YTrain;
-sample_size=size(eps_sup_SCA_M,1);
+%%load inputs
+load('CNN_train_in_git.mat');
+load('CNN_validation_in_git.mat');
+sample_size=size(sig_local_train,4);
 rand_seq=randperm(sample_size);
-validation_sample=rand_seq(1:150);
-train_sample=rand_seq(151:end);
-sigma_sup_SCA_M_validation=sigma_sup_SCA_M(:,:,:,validation_sample);
-eps_sup_SCA_M_validation=eps_sup_SCA_M(validation_sample,:);
-sigma_sup_SCA_M_train=sigma_sup_SCA_M(:,:,:,train_sample);
-eps_sup_SCA_M_train=eps_sup_SCA_M(train_sample,:);
+XTrain=sig_local_train(:,:,:,rand_seq);
+YTrain=eps_macro_train(rand_seq,:);
+
+sample_size=size(sig_local_validation,4);
+rand_seq=randperm(sample_size);
+XValidation=sig_local_validation(:,:,:,rand_seq);
+YValidation=eps_macro_validation(rand_seq,:);
+
 CNN_hist={['Iteration','TrainingLoss', 'TrainingRMSE',...
                      'ValidationLoss','ValidationRMSE',...
                      'State']};
@@ -52,10 +54,14 @@ layers = [
     convolution2dLayer(6,64,'Padding','same') 
     reluLayer
     
-    dropoutLayer(0.15)
+    dropoutLayer(0.05)
     fullyConnectedLayer(3)
     regressionLayer];
 
+layer{2}.Weights = randn([6 6 3 8]) * 0.1+0.3;
+layer{5}.Weights = randn([6 6 3 16]) * 0.1+0.1;
+layer{8}.Weights = randn([6 6 3 32]) * 0.1+0.3;
+layer{11}.Weights = randn([6 6 3 64]) * 0.1+0.2;
 %% define batch size
 miniBatchSize  = 8;
 validationFrequency = 100;
@@ -63,24 +69,21 @@ validationFrequency = 100;
 options = trainingOptions('sgdm', ...
     'ExecutionEnvironment','auto',...
     'MiniBatchSize',miniBatchSize, ...
-    'MaxEpochs',20, ...
-    'InitialLearnRate',1e-2, ...
+    'MaxEpochs',60, ...
+    'InitialLearnRate',2e-2, ...
     'LearnRateSchedule','piecewise', ...
-    'LearnRateDropFactor',0.01, ...
-    'LearnRateDropPeriod',30, ...
+    'LearnRateDropFactor',0.2, ...
+    'LearnRateDropPeriod',10, ...
     'Shuffle','every-epoch', ...
-    'ValidationData',{sigma_sup_SCA_M_validation,eps_sup_SCA_M_validation}, ...
+    'ValidationData',{XValidation,YValidation}, ...
     'ValidationFrequency',validationFrequency, ...
-    'ValidationPatience',Inf,...
     'Plots','training-progress', ...
     'Verbose',false,...
-     'OutputFcn',@(info)outputfunc(info,30));
+     'OutputFcn',@(info)outputfunc(info,10));
 
-%% Train it
-net = trainNetwork(sigma_sup_SCA_M_train,eps_sup_SCA_M_train,layers,options);
+%% Train
+net = trainNetwork(XTrain,YTrain,layers,options);
 
-eps_sup_CNN_M=predict(net,sigma_sup_SCA_M_validation,'ExecutionEnvironment','auto');
-
-save CNN_results net sigma_sup_SCA_M_validation eps_sup_SCA_M_validation eps_sup_CNN_M CNN_hist
+save CNN_results net sig_local_validation eps_macro_validation CNN_hist
 
 end

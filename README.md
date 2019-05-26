@@ -17,7 +17,7 @@ This package contains the code used in the sections of the paper as follows:
 
 To reproduce the results from each of these sections, one can simply download the repo and follow the associated read_me file. You ought to get results similar, though perhaps not exactly the same, as those shown in the manuscript.
 
-Data generated with SCA for training the neural networks is provided as a demonstration.
+Data generated with SCA for training the neural networks is provided as a demonstration. These databases, as well as the trained neural net used for topology optimization, are collected in /Databases for convience. These are identical to the databases within the various sub-folders.
 
 To test out different loading cases for the CNN and FFNN code has been provided to generate a random load history to simulate. This is avaliable by commenting and uncommenting specific lines.
 

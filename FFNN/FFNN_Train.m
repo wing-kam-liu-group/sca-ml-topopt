@@ -17,7 +17,7 @@
 %     Last Modifyed: May 1, 2019
 
 %% Load training data
-input=load('SCA_NN_database.mat');
+load(fullfile('..','Database','SCA_NN_database.mat'));
 net = fitnet(25);
 net = train(net,input.epsilon_sup_M',input.sigma_sup_M');
 

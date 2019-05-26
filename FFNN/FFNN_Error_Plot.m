@@ -1,4 +1,4 @@
-%     This program is for validation trained FFNN 
+%     This program is for validation of trained FFNN 
 %     Copyright (C) May 1 2019,  Jiaying Gao, Northwestern University
 % 
 %     This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,8 @@
 %      Last Modifyed: May 8, 2019
 
 %% erorr plot
-load('SCA_NN_validation.mat')
-load('loading_samples_150_test.mat')
+load('..\Database\SCA_NN_validation.mat')
+load('..\Database\loading_samples_150_test.mat')
 load('SCA_NN_net.mat');
 sigma_sup_FFNN_M=net(epsilon_sup_M')';
 

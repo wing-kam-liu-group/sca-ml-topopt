@@ -16,7 +16,7 @@
 %     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 %% predict macroscopic strain state
-load('CNN_results.mat')
+load(fullfile('CNN_results.mat'));
 eps_macro_prediction=predict(net, sig_local_validation, 'ExecutionEnvironment', 'auto');
 
 % l2 norm 

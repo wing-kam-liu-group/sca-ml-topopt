@@ -17,8 +17,8 @@
 %      Last Modifyed: May 8, 2019
 
 %% erorr plot
-load('..\Database\SCA_NN_validation.mat')
-load('..\Database\loading_samples_150_test.mat')
+load(fullfile('..','Database','SCA_NN_validation.mat'));
+load(fullfile('..','Database','loading_samples_150_test.mat'));
 load('SCA_NN_net.mat');
 sigma_sup_FFNN_M=net(epsilon_sup_M')';
 

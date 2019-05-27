@@ -1,6 +1,6 @@
 # Clustering discretization methods for generation of material performance databases  in machine learning and design optimization
 
-Repo for Li, Kafka, Gao et al 2019 "Clustering discretization methods for generation of material performance databases  in machine learning and design optimization". If you use our software/code, please cite us!
+Repo for Li, Kafka, Gao et al 2019 "Clustering discretization methods for generation of material performance databases  in machine learning and design optimization", which can be found at: https://doi.org/10.1007/s00466-019-01716-0. If you use our software/code, please cite us!
 
 
 
